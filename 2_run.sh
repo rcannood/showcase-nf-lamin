@@ -1,16 +1,20 @@
 #!/bin/bash
 
-# Step 2: run nf-core/scrnaseq, consuming the samplesheet from LaminDB by uid.
+# Step 2: run nf-core/scrnaseq on the samplesheet registered in step 1.
 # nf-lamin records the run, its inputs (samplesheet, FASTQs, reference) and the
-# output count matrices in laminlabs/lamindata during execution.
+# output count matrices in LaminDB during execution.
 set -euo pipefail
+
+# settings, see the README
+: "${LAMIN_API_KEY:?should be set to your Lamin API key}"
+: "${LAMIN_CURRENT_INSTANCE:?should be set to your instance, e.g. my-org/my-instance}"
+: "${OUTDIR:?should be set to where the outputs are published, e.g. s3://my-bucket/showcase/scrnaseq_pbmc8k}"
 
 export NXF_VER=25.10.5
 export NXF_SYNTAX_PARSER=v1
-export AWS_PROFILE=lam
 
-INPUT="lamin://laminlabs/lamindata/artifact/rF7oiknTdhpfqU5H"
-OUTDIR="${LAMIN_TEST_BUCKET}/scrnaseq_showcase/run_$(date +%Y%m%d_%H%M%S)"
+# the samplesheet registered in step 1, referenced by its uid
+INPUT="lamin://${LAMIN_CURRENT_INSTANCE}/artifact/$(cat samplesheet.uid)"
 
 # Human GRCh38 reference (Ensembl release 110)
 FASTA="https://ftp.ensembl.org/pub/release-110/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz"

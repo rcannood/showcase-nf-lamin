@@ -34,6 +34,8 @@ sheet <- ln$Artifact(
   description = "nf-core/scrnaseq samplesheet for 10x PBMC 8k (human)"
 )$save()
 
+# step 2 reads the uid from this file
+writeLines(sheet$uid, "samplesheet.uid")
 cat("\nSamplesheet artifact uid:", sheet$uid, "\n")
 
 ln$finish()
