@@ -31,6 +31,8 @@ flowchart LR
 export LAMIN_API_KEY=...                           # from https://lamin.ai/settings
 export LAMIN_CURRENT_INSTANCE=my-org/my-instance
 export OUTDIR=s3://my-bucket/showcase/scrnaseq_pbmc8k
+# or let Lamin manage the storage credentials, by publishing into your instance's storage:
+# export OUTDIR='lamin://my-org/my-instance#prefix=showcase/scrnaseq_pbmc8k'
 
 # 1. Build and register the samplesheet
 ./1_samplesheet_pbmc8k.R

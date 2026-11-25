@@ -8,7 +8,7 @@ set -euo pipefail
 # settings, see the README
 : "${LAMIN_API_KEY:?should be set to your Lamin API key}"
 : "${LAMIN_CURRENT_INSTANCE:?should be set to your instance, e.g. my-org/my-instance}"
-: "${OUTDIR:?should be set to where the outputs are published, e.g. s3://my-bucket/showcase/scrnaseq_pbmc8k}"
+: "${OUTDIR:?should be set to where the outputs are published, e.g. s3://my-bucket/showcase/scrnaseq_pbmc8k or lamin://my-org/my-instance#prefix=showcase/scrnaseq_pbmc8k}"
 
 export NXF_VER=25.10.5
 export NXF_SYNTAX_PARSER=v1
