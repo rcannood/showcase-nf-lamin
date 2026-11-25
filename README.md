@@ -27,12 +27,14 @@ flowchart LR
 ## Run
 
 ```bash
-# 0. Settings: where to track, and where to publish the pipeline outputs
+# 0. Settings: which LaminDB instance to track in
 export LAMIN_API_KEY=...                           # from https://lamin.ai/settings
 export LAMIN_CURRENT_INSTANCE=my-org/my-instance
-export OUTDIR=s3://my-bucket/showcase/scrnaseq_pbmc8k
-# or let Lamin manage the storage credentials, by publishing into your instance's storage:
-# export OUTDIR='lamin://my-org/my-instance#prefix=showcase/scrnaseq_pbmc8k'
+
+# The pipeline outputs are published into the instance's storage, at
+# lamin://my-org/my-instance#prefix=showcase/scrnaseq_pbmc8k, with credentials managed by Lamin.
+# To publish elsewhere instead:
+# export OUTDIR=s3://my-bucket/showcase/scrnaseq_pbmc8k
 
 # 1. Build and register the samplesheet
 ./1_samplesheet_pbmc8k.R
@@ -51,7 +53,7 @@ Every run and artifact from this showcase, recorded in `laminlabs/lamindata`:
 | Step | Transform | Output |
 | --- | --- | --- |
 | 1. samplesheet (R) | [`1_samplesheet_pbmc8k.R`](https://lamin.ai/laminlabs/lamindata/transform/NKe21Y2XEBIo0000) | [`pbmc8k_samplesheet.csv`](https://lamin.ai/laminlabs/lamindata/artifact/rF7oiknTdhpfqU5H0000) |
-| 2. nf-core/scrnaseq | [`nf-core/scrnaseq`](https://lamin.ai/laminlabs/lamindata/run/PXe4TYRvVNcRstzl) | [`combined_cellbender_filter_matrix.h5ad`](https://lamin.ai/laminlabs/lamindata/artifact/SGHdW3cN3QXHJJCz0000) |
-| 3. cell typing (Python) | [`3_celltyping.py`](https://lamin.ai/laminlabs/lamindata/transform/cyuZlQ5ua0wJ0000) | [`showcase/pbmc8k_celltyped.h5ad`](https://lamin.ai/laminlabs/lamindata/artifact/JvUll5j4iQDhTobi0000) |
+| 2. nf-core/scrnaseq | [`nf-core/scrnaseq`](https://lamin.ai/laminlabs/lamindata/run/XQYuAkIYyecNSpcf) | [`combined_cellbender_filter_matrix.h5ad`](https://lamin.ai/laminlabs/lamindata/artifact/5usKAo9edoKsMrh50000) |
+| 3. cell typing (Python) | [`3_celltyping.py`](https://lamin.ai/laminlabs/lamindata/transform/cyuZlQ5ua0wJ0000) | [`showcase/pbmc8k_celltyped.h5ad`](https://lamin.ai/laminlabs/lamindata/artifact/GWxjro1eLIeJBjwX0000) |
 
-Open the [cell typed artifact](https://lamin.ai/laminlabs/lamindata/artifact/JvUll5j4iQDhTobi0000) for the full lineage graph, or run `ln.Artifact.get(key="showcase/pbmc8k_celltyped.h5ad").view_lineage()`.
+Open the [cell typed artifact](https://lamin.ai/laminlabs/lamindata/artifact/GWxjro1eLIeJBjwX0000) for the full lineage graph, or run `ln.Artifact.get(key="showcase/pbmc8k_celltyped.h5ad").view_lineage()`.
